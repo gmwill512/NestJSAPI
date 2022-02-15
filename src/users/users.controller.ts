@@ -24,6 +24,17 @@ export class UsersController {
         return user
     }
 
+    @Get('/whoami')
+    whoAmI(@Session() session: any) {
+        return this.usersService.findOne(session.userId)
+    }
+
+    @Post('/signout')
+    signOut(@Session() session: any) {
+        session.userId = null
+        console.log(session)
+    }
+
     @Get()
     findAllUsers(@Query("email") email: string) {
         return this.usersService.find(email)
@@ -39,7 +50,7 @@ export class UsersController {
         } else {
             return user
         }
-    } S
+    }
 
     @Patch("/:id")
     updateUser(@Param("id") id: string, @Body() body: UpdateUserDto) {

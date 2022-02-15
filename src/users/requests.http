@@ -36,4 +36,9 @@ Content-Type: application/json
 "email": "aefawefaweffaef@aewfawef.com"
 }
 
+###Get userId
+GET http://localhost:3000/auth/whoami
 
+
+### Sign Out
+POST  http://localhost:3000/auth/signout
