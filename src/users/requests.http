@@ -1,0 +1,39 @@
+###Create new user
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "georasdfadsge@dwsdfsdfsdfdsfada.com",
+    "password": "HELLdsf sdasdfasdfdOO"
+}
+
+###Send sign in request
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "georasdfadsge@dwsdfsdfsdfdsfada.com",
+    "password": "HELLdsf sdasdfasdfdOO"
+}
+###Find user with an id
+GET http://localhost:3000/auth/16
+
+
+###Find all users with email
+GET http://localhost:3000/auth?email=george@dwsda.com
+
+
+
+###Remove user id
+DELETE http://localhost:3000/auth/13
+
+### Updating user information
+PATCH http://localhost:3000/auth/2
+Content-Type: application/json
+
+{
+
+"email": "aefawefaweffaef@aewfawef.com"
+}
+
+
