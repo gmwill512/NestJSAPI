@@ -1,15 +1,19 @@
-import { Body, Controller, Get, Post, Patch, Param, Query, Delete, NotFoundException, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Patch, Param, Query, Delete, NotFoundException, Session, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-users.dto';
 import { UpdateUserDto } from './dtos/updateUser.dto';
 import { UserDto } from './dtos/user.dto';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/currentUser.decorator';
+import { User } from './user.entity';
+import { AuthGuard } from '../guards/auth.guards';
 
 @Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
     constructor(private usersService: UsersService, private authService: AuthService) { }
+
     @Post('signup')
     async createUser(@Body() body: CreateUserDto, @Session() session: any) {
         const user = await this.authService.signUp(body.email, body.password)
@@ -24,10 +28,15 @@ export class UsersController {
         return user
     }
 
-    @Get('/whoami')
-    whoAmI(@Session() session: any) {
-        return this.usersService.findOne(session.userId)
+    @Get("/whoami")
+    @UseGuards(AuthGuard)
+    whoAmI(@CurrentUser() user: User) {
+        return user
     }
+    // @Get('/whoami')
+    // whoAmI(@Session() session: any) {
+    //     return this.usersService.findOne(session.userId)
+    // }
 
     @Post('/signout')
     signOut(@Session() session: any) {

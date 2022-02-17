@@ -20,7 +20,7 @@ GET http://localhost:3000/auth/16
 
 
 ###Find all users with email
-GET http://localhost:3000/auth?email=george@dwsda.com
+GET http://localhost:3000/auth?email=georasdfadsge@dwsdfsdfsdfdsfada.com
 
 
 
