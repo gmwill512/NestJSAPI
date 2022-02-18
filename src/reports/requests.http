@@ -1,0 +1,24 @@
+### It creates a new report
+POST http://localhost:3000/reports
+Content-Type: application/json
+
+{
+    "make":"ford",
+    "model":"mustang",
+    "year":1982,
+    "lat":45,
+    "lng":45,
+    "mileage":50000,
+    "price":20000
+}
+
+### Updates admin to true or false
+PATCH http://localhost:3000/reports/1
+Content-Type: application/json
+
+{
+    "approved":true
+}
+
+###Gets Price Estimate
+GET http://localhost:3000/reports?make=ford&model=mustang&year=1981&lat=44&lng=44&mileage=50000
